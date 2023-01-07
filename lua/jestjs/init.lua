@@ -8,7 +8,8 @@ M.config = {
   test_file_mapping = "<Leader>jf",
   test_single_mapping = "<Leader>js",
   open_test_mode_mapping = "<Leader>jo",
-  test_selected_file_mapping = "<Leader>jmf"
+  test_selected_file_mapping = "<Leader>jmf",
+  test_coverage = "<Leader>jc",
 }
 
 M.test_project = function()
@@ -43,6 +44,19 @@ M.test_single = function ()
   jest.exec_jest(args)
 end
 
+M.test_coverage = function ()
+  local args = {}
+  table.insert(args, ' --coverage')
+  table.insert(args, ' --silent')
+
+  jest.exec_jest(args)
+end
+
+M.test_test = function ()
+  print('test')
+  utils.open_window()
+end
+
 M.setup = function (user_opts)
   M.config = vim.tbl_extend("force", M.config, user_opts or {})
 
@@ -51,6 +65,8 @@ M.setup = function (user_opts)
   utils.set_keymap(M.config.test_project_mapping, M.test_project, opts)
   utils.set_keymap(M.config.test_file_mapping, M.test_file, opts)
   utils.set_keymap(M.config.test_single_mapping, M.test_single, opts)
+  utils.set_keymap(M.config.test_coverage, M.test_coverage, opts)
+  utils.set_keymap('<Leader>jtt', M.test_test, opts)
 end
 
 return M
