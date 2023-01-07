@@ -13,7 +13,7 @@ local get_windows_opts = function()
   local height = vim.api.nvim_get_option("lines")
 
   local win_height = math.ceil(height * 0.8 - 4)
-  local win_width = math.ceil(width * 0.8)
+  local win_width = math.ceil(width * 0.9)
 
   local row = math.ceil((height - win_height) / 2 - 1)
   local col = math.ceil((width - win_width) / 2)
@@ -25,7 +25,7 @@ local get_windows_opts = function()
     height = win_height,
     row = row,
     col = col,
-    border = "rounded",
+    border = "double",
   }
 
   return opts
