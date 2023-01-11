@@ -4,11 +4,15 @@ local utils = require "jestjs.utils"
 local jest = require "jestjs.jest"
 
 M.config = {
+  -- Mapping for running tests of the whole project.
   test_project_mapping = "<Leader>jp",
+  -- Mapping for running tests of the current open file.
   test_file_mapping = "<Leader>jf",
+  -- Mapping for running tests of the current selected test case.
   test_single_mapping = "<Leader>js",
   open_test_mode_mapping = "<Leader>jo",
   test_selected_file_mapping = "<Leader>jmf",
+  -- Mapping for runnign tests and get the coverage results.
   test_coverage = "<Leader>jc",
 }
 
