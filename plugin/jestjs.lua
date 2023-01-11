@@ -4,7 +4,7 @@ end
 
 vim.g.jestjs_loaded = true
 
-local jestjs = require("jestjs")
+local jestjs = require "jestjs"
 
 jestjs.setup()
 
@@ -23,10 +23,14 @@ command("JestJSSingle", function ()
  jestjs.test_single()
 end, {})
 
-command("JestJSOpenTestMode", function ()
-  jestjs.open_test_mode()
-end, {})
+-- command("JestJSOpenTestMode", function ()
+--   jestjs.open_test_mode()
+-- end, {})
+--
+-- command("JestJSSelectedFile", function ()
+--   jestjs.test_selected_file()
+-- end, {})
 
-command("JestJSSelectedFile", function ()
-  jestjs.test_selected_file()
+command("JestJSCoverage", function ()
+  jestjs.test_coverage()
 end, {})
