@@ -6,8 +6,6 @@ vim.g.jestjs_loaded = true
 
 local jestjs = require "jestjs"
 
-jestjs.setup()
-
 local api = vim.api
 local command = api.nvim_create_user_command
 

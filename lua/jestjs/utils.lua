@@ -61,6 +61,13 @@ M.get_current_file_path = function ()
   return vim.fn.expand('%:p')
 end
 
+M.get_initial_buf_values = function ()
+  local bufnr = vim.api.nvim_get_current_buf()
+  local file_path = M.get_current_file_path()
+
+  return bufnr, file_path
+end
+
 M.has_value = function (tab, val)
   for _, tab_val in ipairs(tab) do
     if tab_val == val then
