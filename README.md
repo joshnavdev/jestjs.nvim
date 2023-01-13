@@ -11,7 +11,7 @@ NeoVim plugin to run JestJS in Lua.
 - Run Jest on the current open file.
 - Run Jest on the current test case.
 - Run Jest on the whole project and get coverage results.
-- Show diagnostic of the test result for the current file (TODO)
+- Show diagnostic of the test result for the current file. (TO improve)
 
 ## Install
 
@@ -60,5 +60,7 @@ However you can pas config options, the desaults are:
   test_single_mapping = "<Leader>js",
   -- Mapping for runnign tests and get the coverage results.
   test_coverage = "<Leader>jc",
+  -- Run diagnostics after test
+  run_diagnostic = true,
 }
 ```

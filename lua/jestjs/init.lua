@@ -2,6 +2,7 @@ local M = {}
 
 local utils = require "jestjs.utils"
 local jest = require "jestjs.jest"
+local diagnostic = require "jestjs.diagnostic"
 
 M.config = {
   -- Mapping for running tests of the whole project.
@@ -14,12 +15,23 @@ M.config = {
   test_selected_file_mapping = "<Leader>jmf",
   -- Mapping for runnign tests and get the coverage results.
   test_coverage = "<Leader>jc",
+  -- Run diagnostics after test
+  run_diagnostic = true,
 }
+
+M.run_diagnostic_if_can = function ()
+  if M.config.run_diagnostic then
+    local bufnr, file_path = utils.get_initial_buf_values()
+    print("Starting diagnostic...")
+    diagnostic.start(bufnr, file_path)
+  end
+end
 
 M.test_project = function()
   local args = {}
   table.insert(args, ' --silent')
 
+  M.run_diagnostic_if_can()
   jest.exec_jest(args)
 end
 
@@ -30,6 +42,7 @@ M.test_file = function (file_path)
   table.insert(args, ' --runTestsByPath ' .. current_file)
   table.insert(args, ' --silent')
 
+  M.run_diagnostic_if_can()
   jest.exec_jest(args)
 end
 
@@ -45,6 +58,7 @@ M.test_single = function ()
   table.insert(args, ' --runTestsByPath ' .. current_file)
   table.insert(args, " --testNamePattern='" .. test_name .. "'")
 
+  M.run_diagnostic_if_can()
   jest.exec_jest(args)
 end
 
@@ -56,11 +70,6 @@ M.test_coverage = function ()
   jest.exec_jest(args)
 end
 
-M.test_test = function ()
-  print('test')
-  utils.open_window()
-end
-
 M.setup = function (user_opts)
   M.config = vim.tbl_extend("force", M.config, user_opts or {})
 
@@ -70,7 +79,6 @@ M.setup = function (user_opts)
   utils.set_keymap(M.config.test_file_mapping, M.test_file, opts)
   utils.set_keymap(M.config.test_single_mapping, M.test_single, opts)
   utils.set_keymap(M.config.test_coverage, M.test_coverage, opts)
-  utils.set_keymap('<Leader>jtt', M.test_test, opts)
 end
 
 return M

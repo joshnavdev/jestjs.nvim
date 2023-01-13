@@ -27,8 +27,13 @@ M.run_jest = function(args)
 end
 
 M.get_test_name = function ()
-  local regex = "^%s*(.+)%(['\"](.+)['\"]"
   local line = vim.api.nvim_get_current_line()
+
+  return M.get_test_name_from_line(line)
+end
+
+M.get_test_name_from_line = function (line)
+  local regex = "^%s*(.+)%(['\"](.+)['\"]"
 
   local first_match, test_name = string.match(line, regex)
 
